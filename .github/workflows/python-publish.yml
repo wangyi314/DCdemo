@@ -5,32 +5,21 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-
-name: Upload Python Package
-
+name: DCdemo
 on:
-  release:
-    types: [published]
-
+  # GitHub Actions 使用国际标准时间，与国内相差 16 小时，设置时注意避雷
+  # 详细语法参见 https://www.runoob.com/linux/linux-comm-crontab.html
+  schedule:
+    - cron: '*/30 20-21 * * *'  # 此处设置为北京时间 4:00、4:30、5:00、5:30 共尝试四次
+  watch:
+    types: [started]  # 也可以通过手动对项目 star 来触发
 jobs:
-  deploy:
-
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: ubuntu-20.04
+    if: github.event.repository.owner.id == github.event.sender.id
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build
-    - name: Build package
-      run: python -m build
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      - name: install modules
+        run: 'pip install -r requirements.txt'
+
+      - name: auto checkin
+        run: python run.py
