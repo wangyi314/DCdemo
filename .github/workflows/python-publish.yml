@@ -23,4 +23,4 @@ jobs:
         
 
       - name: auto checkin
-        run: python run.py
+        run: python main.py.py
