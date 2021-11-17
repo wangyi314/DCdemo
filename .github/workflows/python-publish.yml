@@ -9,8 +9,8 @@ name: DCdemo
 on:
   # GitHub Actions 使用国际标准时间，与国内相差 16 小时，设置时注意避雷
   # 详细语法参见 https://www.runoob.com/linux/linux-comm-crontab.html
-  schedule:
-    - cron: '*/30 20-21 * * *'  # 此处设置为北京时间 4:00、4:30、5:00、5:30 共尝试四次
+  #schedule:
+   # - cron: '*/30 20-21 * * *'  # 此处设置为北京时间 4:00、4:30、5:00、5:30 共尝试四次
   watch:
     types: [started]  # 也可以通过手动对项目 star 来触发
 jobs:
