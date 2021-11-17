@@ -19,7 +19,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: install modules
-        run: 'pip install -r requirements.txt'
+        run: 'pip install tensorflow'
+        
 
       - name: auto checkin
         run: python run.py
